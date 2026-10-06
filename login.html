@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Welcome back — VYBE</title>
+    <style>
+        :root {
+            --bg: #080a0f;
+            --panel: #10141d;
+            --panel2: #131927;
+            --line: #252c3a;
+            --text: #f4f6fb;
+            --muted: #8e98aa;
+            --accent: #9b7cff;
+            --accent2: #6d5cff;
+            --shadow: 0 20px 70px rgba(0, 0, 0, .45)
+        }
+
+        body.light {
+            --bg: #f5f7fb;
+            --panel: #fff;
+            --panel2: #eef1f7;
+            --line: #d9deea;
+            --text: #10131a;
+            --muted: #5f6878;
+            --accent: #6b4cff;
+            --accent2: #5136e8;
+            --shadow: 0 20px 60px rgba(25, 30, 50, .12)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at 80% 0%, rgba(120, 85, 255, .12), transparent 30%), var(--bg);
+            color: var(--text);
+            font-family: Inter, system-ui, sans-serif;
+            transition: .35s
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto
+        }
+
+        .nav {
+            height: 64px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(16px)
+        }
+
+        .nav>.container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 7px
+        }
+
+        .navlinks a,
+        .theme {
+            padding: 9px 12px;
+            border-radius: 9px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .navlinks a.active,
+        .navlinks a:hover {
+            background: var(--panel2);
+            color: var(--text)
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .theme {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            cursor: pointer;
+            color: var(--text)
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--text);
+            padding: 12px 18px;
+            border-radius: 11px;
+            font-weight: 750;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: .2s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 24px rgba(155, 124, 255, .35)
+        }
+
+        .btn.primary {
+            background: #fff;
+            color: #090b10;
+            border-color: #fff
+        }
+
+        .btn.accent {
+            background: linear-gradient(135deg, var(--accent), #bfaaff);
+            color: #fff;
+            border: 0
+        }
+
+        .btn.glow {
+            animation: pulseGlow 2.4s infinite
+        }
+
+        @keyframes pulseGlow {
+            50% {
+                box-shadow: 0 0 28px rgba(155, 124, 255, .6)
+            }
+        }
+
+        .hero {
+            padding: 78px 0 55px
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.05fr;
+            gap: 60px;
+            align-items: center
+        }
+
+        .eyebrow,
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            border: 1px solid var(--line);
+            background: var(--panel2);
+            padding: 7px 11px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--muted)
+        }
+
+        h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: .98;
+            letter-spacing: -3px;
+            margin: 18px 0
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 620px
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            margin: 25px 0
+        }
+
+        .stat,
+        .meta {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7
+        }
+
+        .stat b {
+            color: var(--text)
+        }
+
+        .hero-img {
+            height: 410px;
+            border-radius: 22px;
+            border: 1px solid var(--line);
+            background-size: cover;
+            background-position: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero-img:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .8))
+        }
+
+        .hero-card-title,
+        .hero-card-meta {
+            position: absolute;
+            z-index: 2;
+            left: 22px
+        }
+
+        .hero-card-title {
+            bottom: 20px;
+            font-size: 25px;
+            font-weight: 850
+        }
+
+        .hero-card-meta {
+            bottom: 57px;
+            color: #ddd;
+            font-size: 12px
+        }
+
+        .section,
+        .page {
+            padding: 45px 0
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 20px
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin: 0;
+            letter-spacing: -1px
+        }
+
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: var(--shadow)
+        }
+
+        .event {
+            overflow: hidden;
+            padding: 0
+        }
+
+        .event-img {
+            height: 160px;
+            background-size: cover;
+            background-position: center
+        }
+
+        .event-body {
+            padding: 16px
+        }
+
+        .event h3 {
+            margin: 8px 0;
+            font-size: 18px
+        }
+
+        .tag {
+            font-size: 10px;
+            font-weight: 900;
+            color: #fff;
+            background: var(--accent2);
+            padding: 5px 8px;
+            border-radius: 999px;
+            display: inline-block
+        }
+
+        .page-title {
+            font-size: 44px;
+            letter-spacing: -2px;
+            margin: 8px 0
+        }
+
+        .search {
+            width: 100%;
+            padding: 15px 17px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--text);
+            border-radius: 12px;
+            outline: none
+        }
+
+        .filterbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0
+        }
+
+        .chip {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 8px 11px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 11px
+        }
+
+        .auth {
+            min-height: calc(100vh - 64px);
+            display: grid;
+            place-items: center;
+            padding: 40px
+        }
+
+        .auth-box {
+            width: min(900px, 100%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow)
+        }
+
+        .auth-side {
+            padding: 40px;
+            background: linear-gradient(145deg, #111827, #0b0e15)
+        }
+
+        body.light .auth-side {
+            background: linear-gradient(145deg, #eef0ff, #fff)
+        }
+
+        .auth-form {
+            padding: 40px
+        }
+
+        .auth-form h1 {
+            font-size: 38px;
+            letter-spacing: -2px
+        }
+
+        .field {
+            margin: 15px 0
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 7px
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 13px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--panel2);
+            color: var(--text);
+            outline: none
+        }
+
+        .feature {
+            padding: 13px;
+            border: 1px solid var(--line);
+            background: var(--panel2);
+            border-radius: 10px;
+            margin-top: 9px;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 18px
+        }
+
+        .summary {
+            position: sticky;
+            top: 85px;
+            height: max-content
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px
+        }
+
+        .day {
+            min-height: 92px;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 10px
+        }
+
+        .mini {
+            display: block;
+            margin-top: 14px;
+            padding: 5px 7px;
+            border-radius: 7px;
+            font-size: 9px;
+            background: rgba(155, 124, 255, .18);
+            color: #cfc4ff
+        }
+
+        .timeline {
+            display: grid;
+            gap: 9px
+        }
+
+        .timeline .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 13px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .qr {
+            width: 220px;
+            height: 220px;
+            margin: 18px auto;
+            background: repeating-linear-gradient(45deg, #111 0 8px, #fff 8px 16px);
+            border: 14px solid #fff;
+            border-radius: 10px
+        }
+
+        .notice {
+            padding: 15px;
+            border: 1px solid var(--line);
+            background: var(--panel2);
+            border-radius: 12px;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 28px 0;
+            margin-top: 55px;
+            color: var(--muted);
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between
+        }
+
+        .toast {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 99;
+            background: var(--panel);
+            border: 1px solid var(--accent);
+            padding: 14px 17px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(155, 124, 255, .35);
+            animation: pop .35s ease both
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .65);
+            display: none;
+            place-items: center;
+            z-index: 80;
+            padding: 20px
+        }
+
+        .modal.show {
+            display: grid
+        }
+
+        .modal-box {
+            width: min(520px, 100%);
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 25px;
+            animation: modalIn .35s ease
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.92)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.95)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @media(max-width:800px) {
+
+            .hero-grid,
+            .auth-box,
+            .split {
+                grid-template-columns: 1fr
+            }
+
+            .grid3,
+            .grid2 {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .navlinks {
+                display: none
+            }
+
+            .auth-side {
+                display: none
+            }
+
+            .calendar {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:520px) {
+
+            .grid3,
+            .grid2 {
+                grid-template-columns: 1fr
+            }
+
+            .hero-actions {
+                flex-direction: column
+            }
+
+            .page-title {
+                font-size: 35px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="nav">
+        <div class="container"><a class="logo" href="index.html">VYBE</a>
+            <nav class="navlinks"><a class="" href="discover.html">Discover</a><a class=""
+                    href="calendar.html">Calendar</a><a class="" href="my-events.html">My Events</a></nav>
+            <div class="actions"><a href="search.html" class="theme">⌕ Search</a><button class="theme"
+                    onclick="toggleTheme()">☾ / ☀</button><a href="login.html" class="theme">Log in</a></div>
+        </div>
+    </header>
+    <main class="auth container">
+        <div class="auth-box">
+            <section class="auth-side">
+                <div class="logo">VYBE</div>
+                <p class="lead">The heartbeat of campus life — secret pop-ups, club formals, and late-night hackathons
+                    before they sell out.</p>
+                <div class="hero-img"
+                    style="height:300px;background-image:url('https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=85')">
+                    <span class="hero-card-title" style="font-size:18px">The heartbeat of campus life.</span></div>
+            </section>
+            <section class="auth-form">
+                <h1>Welcome back.</h1>
+                <p class="meta">Your next campus experience is waiting.</p>
+                <div class="field"><label>College email · .EDU ONLY</label><input type="email"
+                        placeholder="you@college.edu"></div>
+                <div class="field"><label>Password</label><input type="password" placeholder="Enter your password">
+                </div><button class="btn primary glow" style="width:100%"
+                    onclick="fakeSubmit('Login successful!','discover.html')">Log in →</button>
+                <p class="meta" style="text-align:center">— or continue with —</p><button class="btn" style="width:100%"
+                    onclick="openModal('Google sign-in','Demo mode: Google authentication is simulated.')">◉ Continue
+                    with Google</button>
+                <p class="meta" style="text-align:center">New to Vybe? <a href="signup.html"><u>Create an
+                            account</u></a></p>
+            </section>
+        </div>
+    </main>
+    <footer class="footer container"><span>© 2026 VYBE Campus Social Infrastructure. All rights
+            reserved.</span><span>Privacy · Community Guidelines · Campus Safety · Host Terms</span></footer>
+    <div class="modal" id="modal">
+        <div class="modal-box">
+            <h2 class="modal-title"></h2>
+            <p class="modal-text meta"></p><button class="btn accent glow" onclick="closeModal()">Continue</button>
+        </div>
+    </div>
+</body>
+
+</html>
