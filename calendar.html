@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VYBE — Calendar</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #07090d;
+            --surface: #0d1118;
+            --surface2: #131925;
+            --border: #252d3a;
+            --text: #f5f7fb;
+            --muted: #8993a5;
+            --primary: #8b7cff;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .theme-toggle:checked~.app {
+            --bg: #f5f6fa;
+            --surface: #fff;
+            --surface2: #f0f2f7;
+            --border: #dfe3eb;
+            --text: #10131a;
+            --muted: #687181;
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .app {
+            min-height: 100vh;
+            background: var(--bg);
+        }
+
+        .header {
+            height: 76px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            gap: 35px;
+            background: var(--surface);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+        }
+
+        .nav {
+            display: flex;
+            gap: 25px;
+            color: var(--muted);
+        }
+
+        .actions {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .theme-button {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            background: var(--surface2);
+        }
+
+        .theme-button:before {
+            content: "☾"
+        }
+
+        .theme-toggle:checked~.app .theme-button:before {
+            content: "☀";
+        }
+
+        .container {
+            padding: 45px 6%;
+        }
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 44px;
+        }
+
+        .month {
+            display: flex;
+            gap: 10px;
+        }
+
+        .month a {
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+        }
+
+        .calendar {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: var(--surface);
+        }
+
+        .day {
+            min-height: 125px;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 12px;
+        }
+
+        .weekday {
+            min-height: auto;
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .date {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .event {
+            display: block;
+            margin-top: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            background: #292351;
+            color: #cfc9ff;
+            font-size: 11px;
+        }
+
+        .event.blue {
+            background: #17364b;
+            color: #9bd8ff;
+        }
+
+        @media(max-width:700px) {
+            .nav {
+                display: none
+            }
+
+            .container {
+                padding: 25px 12px;
+                overflow-x: auto;
+            }
+
+            .heading {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .calendar {
+                min-width: 700px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="checkbox" id="theme" class="theme-toggle">
+
+    <div class="app">
+
+        <header class="header">
+
+            <a href="home.html" class="logo">VYBE</a>
+
+            <nav class="nav">
+                <a href="discover.html">Discover</a>
+                <a href="calendar.html">Calendar</a>
+                <a href="my-events.html">My Events</a>
+            </nav>
+
+            <div class="actions">
+                <label for="theme" class="theme-button"></label>
+            </div>
+
+        </header>
+
+        <main class="container">
+
+            <div class="heading">
+
+                <h1>October 2026</h1>
+
+                <div class="month">
+                    <a href="calendar.html">←</a>
+                    <a href="calendar.html">Today</a>
+                    <a href="calendar.html">→</a>
+                </div>
+
+            </div>
+
+            <div class="calendar">
+
+                <div class="day weekday">MON</div>
+                <div class="day weekday">TUE</div>
+                <div class="day weekday">WED</div>
+                <div class="day weekday">THU</div>
+                <div class="day weekday">FRI</div>
+                <div class="day weekday">SAT</div>
+                <div class="day weekday">SUN</div>
+
+                <div class="day"><span class="date">1</span></div>
+                <div class="day"><span class="date">2</span></div>
+                <div class="day"><span class="date">3</span></div>
+                <div class="day"><span class="date">4</span></div>
+                <div class="day"><span class="date">5</span></div>
+
+                <div class="day">
+                    <span class="date">6</span>
+                    <a href="event.html" class="event">Neon Nights</a>
+                </div>
+
+                <div class="day">
+                    <span class="date">7</span>
+                </div>
+
+                <div class="day">
+                    <span class="date">8</span>
+                </div>
+
+                <div class="day">
+                    <span class="date">9</span>
+                </div>
+
+                <div class="day">
+                    <span class="date">10</span>
+                    <a href="event.html" class="event blue">CodeStorm</a>
+                </div>
+
+                <div class="day">
+                    <span class="date">11</span>
+                </div>
+
+                <div class="day">
+                    <span class="date">12</span>
+                    <a href="event.html" class="event">Navratri</a>
+                </div>
+
+                <div class="day"><span class="date">13</span></div>
+                <div class="day"><span class="date">14</span></div>
+
+                <div class="day">
+                    <span class="date">15</span>
+                    <a href="event.html" class="event blue">AI Builders</a>
+                </div>
+
+                <div class="day"><span class="date">16</span></div>
+                <div class="day"><span class="date">17</span></div>
+                <div class="day"><span class="date">18</span></div>
+                <div class="day"><span class="date">19</span></div>
+                <div class="day"><span class="date">20</span></div>
+                <div class="day"><span class="date">21</span></div>
+                <div class="day"><span class="date">22</span></div>
+                <div class="day"><span class="date">23</span></div>
+                <div class="day"><span class="date">24</span></div>
+                <div class="day"><span class="date">25</span></div>
+                <div class="day"><span class="date">26</span></div>
+                <div class="day"><span class="date">27</span></div>
+                <div class="day"><span class="date">28</span></div>
+                <div class="day"><span class="date">29</span></div>
+                <div class="day"><span class="date">30</span></div>
+                <div class="day"><span class="date">31</span></div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
